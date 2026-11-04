@@ -22,10 +22,10 @@ try{ if(localStorage.getItem('theme')==='dark') document.documentElement.dataset
    ===================================================================== */
 const CONFIG = {
   projectName: "Armani Hallson KLCC",
-  agentName:   "Your Name",              // 你的名字
-  agentTitle:  "Property Consultant",    // 职称 / REN 号码，例如 "REN 12345"
+  agentName:   "Jessie Yap",             // 你的名字
+  agentTitle:  "Property Advisor · since 2000",  // 职称 / REN 号码，例如 "REN 12345"
   agency:      "",                       // 公司名称（可留空）
-  whatsapp:    "60123456789"             // WhatsApp 号码：国家码 + 号码，不要 + 号和空格
+  whatsapp:    "60123919088"            // WhatsApp 号码：国家码 + 号码，不要 + 号和空格
 };
 
 /* Unit types — from the developer's sales kit.
@@ -295,6 +295,10 @@ footer p+p{margin-top:12px}
 .sticky .btn{flex:1;padding:14px 10px;font-size:.9rem}
 @media(min-width:800px){.sticky{display:none}}
 
+/* Desktop floating WhatsApp button (mobile uses the sticky bar) */
+.wa-float{display:none;position:fixed;right:24px;bottom:24px;z-index:55;padding:14px 22px}
+@media(min-width:800px){.wa-float{display:inline-flex}}
+
 /* Lightbox */
 #lb{position:fixed;inset:0;z-index:80;background:rgba(12,5,4,.94);display:none;flex-direction:column;align-items:center;justify-content:center;padding:56px 12px 20px;gap:16px}
 #lb.open{display:flex}
@@ -441,7 +445,6 @@ footer p+p{margin-top:12px}
         <p class="fine" data-zh="所有单位都从 10 楼开始。">Every unit starts from level 10.</p>
       </div>
       <table class="facts rv">
-        <tr><th data-zh="发展商">Developer</th><td>Armani Hallson KLCC Sdn Bhd</td></tr>
         <tr><th data-zh="地点">Location</th><td>Jalan Ampang, Kuala Lumpur</td></tr>
         <tr><th data-zh="地契">Land tenure</th><td data-zh="永久地契">Freehold</td></tr>
         <tr><th data-zh="土地面积">Land size</th><td data-zh="2.6 英亩">2.6 acres</td></tr>
@@ -546,7 +549,7 @@ footer p+p{margin-top:12px}
 
 <footer>
   <div class="wrap">
-    <p><strong style="color:#fff" data-cfg="projectName"></strong> · Jalan Ampang, Kuala Lumpur · <span data-zh="发展商">Developer</span>: Armani Hallson KLCC Sdn Bhd</p>
+    <p><strong style="color:#fff" data-cfg="projectName"></strong> · Jalan Ampang, Kuala Lumpur</p>
     <p data-zh="免责声明：本页面由独立房地产顾问制作，仅供参考，不构成任何要约或合约的一部分。所有资料、图片、面积、设施及费用均以发展商的正式文件及买卖合约为准，如有更改，恕不另行通知。所有效果图均为艺术构想图。有盖连接走道的最终设计须经有关当局批准。">Disclaimer: This page is prepared by an independent property consultant for general reference only and does not form part of any offer or contract. All information, images, sizes, facilities and fees are subject to the developer's official documents and the sale and purchase agreement, and may change without notice. All renderings are artist's impressions. The final design of the covered link is subject to authorities' approval.</p>
   </div>
 </footer>
@@ -557,6 +560,10 @@ footer p+p{margin-top:12px}
     WhatsApp</a>
   <a class="btn btn-dark" href="#book" data-zh="预约看房">Book a Viewing</a>
 </div>
+
+<a class="btn btn-wa wa-float" href="#" data-wa="general">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.200a8.200 8.200 0 0 1-4.200-1.200l-.3-.2-3 .8.8-2.900-.2-.3A8.200 8.200 0 1 1 12 20.200z"/></svg>
+  WhatsApp</a>
 
 <div id="lb" role="dialog" aria-modal="true">
   <button class="x" aria-label="Close">×</button>

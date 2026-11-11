@@ -27,7 +27,20 @@ const CONFIG = {
   agency:      "",                               // 公司名称（可留空）
   whatsapp:    "60123919088"                     // 012-391 9088
 };
-const MAINT_PSF = 0.98; // RM per sq ft — confirmed by Jessie 2026-11-04
+const MAINT_PSF = 0.95; // RM per sq ft, inclusive of sinking fund — Sales Kit V4 (Nov 2026)
+
+/* Photo sets for "The life here" — files live in /images. All from Sales Kit V4; "PENDING FA" renders left out. */
+const GALLERY = [
+  {id:"sky", en:"Sky levels", zh:"空中设施", sen:"Level 69 – 73 · Wellness & recreation", szh:"69 – 73 楼 · 休闲与养生",
+   imgs:["sky-l70","sky-pool","sky-deck","sky-lounge","sky-gym","sky-gym2","detail"],
+   tags:[["Skyline Infinity Pool","无边际泳池"],["Skyline 360 Pool & Deck","360 泳池与观景台"],["360 Hot Pool","360 高空温水池"],["Skyline Jacuzzi","按摩池"],["Observation Deck","观景台"],["Fitness Studio","健身室"],["Recovery Lounge & Sauna","桑拿与舒缓区"],["Skyline Circular Bar","圆形空中酒吧"],["Little Lagoon & Play Lounge","儿童泳池与游乐区"],["The Peak (L73)","顶层观景 The Peak"]]},
+  {id:"arrival", en:"Arrival", zh:"迎宾大堂", sen:"Ground floor", szh:"地面层",
+   imgs:["arrival-dropoff","arrival-lobby","arrival-ground"],
+   tags:[["Main Drop-off","主落客区"],["Private Drop-off","私人落客区"],["Grand Lobby","迎宾大堂"]]},
+  {id:"design", en:"The tower", zh:"建筑设计", sen:"The Night Butterfly Tower", szh:"「夜蝶」大楼",
+   imgs:["exceptional","aerial","concept"],
+   tags:[["Butterfly-wing form","蝴蝶翅膀造型"],["Façade lit at night","夜间发光外墙"],["Level 11 Sky Forest & Garden","11 楼空中森林与花园"]]}
+];
 
 /* Unit types — from the developer's "Type of Units & Area Distribution" table.
    q = total units of this type; bed/bath only where the brochure floor plan shows it; img = floor plan in /images */
@@ -165,6 +178,23 @@ nav .btn{padding:10px 18px;font-size:.84rem;display:none}
 .fac b{display:block;font-family:var(--serif);font-size:2.2rem;line-height:1;color:var(--gold-l);margin-bottom:10px}
 .fac h3{font-size:1.25rem;margin-bottom:6px}
 .fac p{font-size:.9rem;color:rgba(255,255,255,.68)}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:56px 0 8px;padding-bottom:6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:11px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.22);font-weight:600;font-size:.9rem;color:rgba(255,255,255,.8)}
+.tab.on{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.tabsub{color:var(--gold-l);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin:14px 0 18px}
+.reel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 14px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.3) transparent}
+@media(min-width:1160px){.reel{padding-left:calc((100vw - 1120px)/2 + 20px);padding-right:calc((100vw - 1120px)/2 + 20px)}}
+.reel img{height:min(60vw,460px);aspect-ratio:1625/1083;width:auto;max-width:none;border-radius:16px;scroll-snap-align:center;flex:none;object-fit:cover;cursor:zoom-in;background:var(--dark2)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.07);font-size:.84rem;color:rgba(255,255,255,.85)}
+.lm b{color:var(--bronze);font-weight:700}
+:root[data-theme="dark"] .lm b{color:var(--gold)}
+.launch{background:var(--gold);color:var(--dark);padding:22px 0}
+.launch .wrap{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between}
+.launch p{font-weight:600;line-height:1.45}
+.launch p b{font-family:var(--serif);font-size:1.35rem;display:block}
+.launch .btn{padding:12px 22px;font-size:.88rem}
 
 /* Quiz */
 .quiz{margin-top:44px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 22px;max-width:760px;box-shadow:0 30px 60px -40px rgba(43,32,23,.5)}
@@ -327,12 +357,21 @@ footer p+p{margin-top:12px}
     </div>
     <div class="stats">
       <div><strong data-zh="永久">Freehold</strong><span data-zh="地契">Land tenure</span></div>
-      <div><strong>MRT</strong><span data-zh="公共交通导向发展 (TOD)">Transit-oriented development</span></div>
+      <div><strong><span data-count="280">280</span><small style="font-size:.5em">m</small></strong><span data-zh="步行到亚罗街">To Jalan Alor</span></div>
       <div><strong><span data-count="1072">1,072</span></strong><span data-zh="服务式公寓单位">Serviced residences</span></div>
       <div><strong><span data-count="14">14</span></strong><span data-zh="种户型选择">Layout types</span></div>
     </div>
   </div>
 </header>
+
+<!-- ============ Launch banner — remove after 21 Nov 2026 ============ -->
+<div class="launch">
+  <div class="wrap">
+    <p data-zh="<b>示范单位开放 · 2026 年 11 月 21 日（星期六）</b>销售展厅：Menara KL33 第 9 层，Jalan Sultan Ismail，吉隆坡">
+      <b>Show units unveiled · Saturday, 21 November 2026</b>Sales Gallery, Level 9, Menara KL33, Jalan Sultan Ismail, Kuala Lumpur</p>
+    <a href="#book" class="btn btn-dark" data-zh="预约和我一起参观">Book your visit with me</a>
+  </div>
+</div>
 
 <!-- ============ 01 — desire: the address ============ -->
 <section id="why">
@@ -341,19 +380,22 @@ footer p+p{margin-top:12px}
     <h2 class="rv" data-zh="不是住在地标旁边，<br>而是每天看着它们醒来。">Not just near the landmarks. Waking up to them.</h2>
 
     <div class="split">
-      <div class="photo rv" data-lb="map"><img loading="lazy" src="images/map.jpg" alt="Location map — surrounded by KL's icons"></div>
+      <div class="photo rv" data-lb="walkable"><img loading="lazy" src="images/walkable.jpg" alt="Walkable urban living — 5, 10 and 15 minute radius"></div>
       <div class="rv">
-        <p class="lead" data-zh="{project} 位于市中心成熟地段，靠近 Jalan Pudu 与 Jalan Bukit Bintang，四周是摩天大楼、历史建筑、商场与日常生活设施。大楼的定位很清楚：让单位面向吉隆坡最具代表性的天际线。">{project} sits in a mature city-centre pocket off Jalan Pudu, by Jalan Bukit Bintang — skyscrapers, heritage sites, malls and everyday amenities all around. The building is positioned for one thing: facing KL's most iconic skyline.</p>
+        <p class="lead" data-zh="{project} 位于 Jalan Pavilion，夹在 Jalan Pudu 与 Jalan Bukit Bintang 之间。步行 5 分钟有日常所需，10 分钟可达生活、教育与休闲去处，15 分钟连接商业区与城市地标。">{project} sits on Jalan Pavilion, between Jalan Pudu and Jalan Bukit Bintang. Daily essentials are a 5-minute walk away, lifestyle, schools and recreation within 10 minutes, and the business districts and landmarks within 15.</p>
         <div class="lms">
-          <div class="lm" data-zh="默迪卡 118">Merdeka 118</div>
-          <div class="lm" data-zh="双峰塔">Petronas Twin Towers</div>
-          <div class="lm" data-zh="吉隆坡塔">KL Tower</div>
-          <div class="lm" data-zh="独立广场">Merdeka Square</div>
-          <div class="lm">Pavilion Bukit Bintang</div>
-          <div class="lm">The Exchange TRX</div>
-          <div class="lm">Berjaya Times Square</div>
-          <div class="lm">LaLaport</div>
+          <div class="lm"><b>280 m</b> · <span data-zh="亚罗街美食街">Jalan Alor Food Street</span></div>
+          <div class="lm"><b>350 m</b> · Plaza Low Yat</div>
+          <div class="lm"><b>400 m</b> · Changkat Bukit Bintang</div>
+          <div class="lm"><b>450 m</b> · <span data-zh="东禅医院">Tung Shin Hospital</span></div>
+          <div class="lm"><b>800 m</b> · Berjaya Times Square</div>
+          <div class="lm"><b>1.0 km</b> · Pavilion KL</div>
+          <div class="lm"><b>1.2 km</b> · LaLaport BBCC</div>
+          <div class="lm"><b>1.4 km</b> · Merdeka 118</div>
+          <div class="lm"><b>1.5 km</b> · The Exchange TRX</div>
+          <div class="lm"><b>2.0 km</b> · <span data-zh="双峰塔 KLCC">Petronas Twin Towers</span></div>
         </div>
+        <p class="fine" style="margin-top:14px"><a href="#" data-lb="map" style="border-bottom:1px solid var(--gold)" data-zh="查看完整位置图与距离 →">See the full location map &amp; distances →</a></p>
       </div>
     </div>
 
@@ -363,10 +405,11 @@ footer p+p{margin-top:12px}
         <p data-zh="永久地契，1.699 英亩的市中心土地。没有倒数的年期，可以一代一代传下去。">Freehold — 1.699 acres in the city centre. No lease counting down; what you buy, you can hand down.</p></div>
       <div class="why rv"><div class="n">ii.</div>
         <h3 data-zh="每天怎么出门？">How do you get around?</h3>
-        <p data-zh="这是一个公共交通导向发展（TOD）项目，连接 MRT。尖峰时段不必开车，也省下市中心的停车费。">It's a transit-oriented development with MRT access. Skip the car at peak hours, and skip city-centre parking fees.</p></div>
+        <p data-zh="MRT 加影线与吉隆坡单轨列车就在附近（Bukit Bintang、Imbi、Hang Tuah 站），还有 LRT 安邦线与大城堡线。尖峰时段不必开车。">The MRT Kajang Line and KL Monorail are moments away (Bukit Bintang, Imbi, Hang Tuah), with the LRT Ampang and Sri Petaling lines close by. Skip the car at peak hours.</p>
+        <p style="margin-top:10px"><a href="#" data-lb="rail" style="border-bottom:1px solid var(--gold);font-weight:700" data-zh="查看轨道交通图 →">See the rail map →</a></p></div>
       <div class="why rv"><div class="n">iii.</div>
         <h3 data-zh="生活需要的都在吗？">Is everything you need close?</h3>
-        <p data-zh="东禅医院（Tung Shin Hospital）约 2 分钟路程，附近有 5 所国际学校。">Tung Shin Hospital is about 2 minutes away, and there are 5 international schools nearby.</p></div>
+        <p data-zh="东禅医院 450 米；St. John's 国际中学 1.4 公里、小学 1.5 公里；EtonHouse 国际学校 2.4 公里；Prince Court 医疗中心 2.1 公里。">Tung Shin Hospital 450 m; St. John's International Secondary 1.4 km and Primary 1.5 km; EtonHouse International School 2.4 km; Prince Court Medical Centre 2.1 km.</p></div>
     </div>
 
     <div class="pull rv" data-zh="问题从来不是「武吉免登的永久地契值不值得拥有」，<br>而是「哪一间，会是你的」。">The question was never whether freehold in Bukit Bintang is worth owning. It's which one will be yours.</div>
@@ -377,25 +420,32 @@ footer p+p{margin-top:12px}
 <section class="dark" id="life">
   <div class="wrap">
     <div class="step rv"><b>02</b><i></i><span class="eyebrow" data-zh="设计与生活">Design &amp; life</span></div>
-    <h2 class="rv" data-zh="一栋为「看风景」<br>而设计的大楼。">A tower designed around the view.</h2>
+    <h2 class="rv" data-zh="下班之后，<br>你的夜晚在 70 楼。">After work, your evening is on the 70th floor.</h2>
     <div class="design">
-      <div class="photo rv" data-lb="cover"><img loading="lazy" src="images/hero.jpg" alt="Armani Hallson Bukit Bintang tower — artist's impression"></div>
+      <div class="photo rv" data-lb="concept"><img loading="lazy" src="images/concept.jpg" alt="Architectural concept — the Night Butterfly Tower"></div>
       <div class="rv">
-        <p class="lead" data-zh="大楼的造型灵感来自<strong>对称的蝴蝶翅膀</strong>，单位向两侧展开，朝向城市地标。">The tower's form is inspired by <strong>symmetrical butterfly wings</strong> — the residences open outward, angled toward the city's landmarks.</p>
-        <p class="lead" data-zh="楼顶的<strong>皇冠</strong>，象征吉隆坡充满活力的夜生活。">The <strong>crown</strong> at the top is a nod to KL's vibrant nightlife.</p>
-        <p class="lead" data-zh="回到家，先经过宽敞明亮的大堂 — 在吉隆坡的发展项目里，这样的大堂并不多见。">Coming home, you arrive through a bright, spacious, grand lobby — something rarely seen in KL developments.</p>
+        <p class="lead" data-zh="大楼的造型源自<strong>蝴蝶翅膀</strong>：对称的双翼结构，外墙如翅膀的纹理。到了晚上，整栋大楼亮起来，像一只被城市能量吸引的「夜蝶」。">The tower takes its form from <strong>butterfly wings</strong> — a symmetrical, wing-shaped structure with a façade patterned like their veins. At night it lights up as a glowing "Night Butterfly", drawn to the energy of the city.</p>
+        <p class="lead" data-zh="<strong>11 楼</strong>是空中森林与花园：城市公园、景观平台、花园凉亭与绿色露台。<br><strong>69 – 73 楼</strong>是整栋楼最高的休闲空间，俯瞰整个吉隆坡天际线。">On <strong>level 11</strong>, a Sky Forest &amp; Garden: an urban park, scenic terrace, garden pavilion and green terrace.<br>On <strong>levels 69 – 73</strong>, the building's highest floors are given over to wellness and recreation, above KL's skyline.</p>
       </div>
     </div>
 
     <div class="facs">
-      <div class="fac rv"><b>5</b><h3 data-zh="个泳池">Pools</h3><p data-zh="包括无边际泳池、按摩池和儿童池。">Including an infinity pool, a jacuzzi and a kids' pool.</p></div>
-      <div class="fac rv"><b>360°</b><h3 data-zh="空中健身房">Sky gym</h3><p data-zh="俯瞰天际线，四周摩天大楼一览无遗。">Overlooking the skyline, with all-round views of the surrounding towers.</p></div>
-      <div class="fac rv"><b>118</b><h3 data-zh="观景台">Observation deck</h3><p data-zh="沿楼梯而上，远眺默迪卡 118 与城市天际线。">Up a staircase, with views toward Merdeka 118 and the skyline.</p></div>
-      <div class="fac rv"><b>2</b><h3 data-zh="个落客点">Drop-off points</h3><p data-zh="专属入口与两个落客区，加上宏伟的迎宾大堂。">A dedicated entrance, two drop-offs and the grand lobby.</p></div>
-      <div class="fac rv"><b>✦</b><h3 data-zh="儿童室">Kids' room</h3><p data-zh="给孩子的专属空间。">A space of their own for the children.</p></div>
-      <div class="fac rv"><b>✦</b><h3 data-zh="休闲与会客区">Lounges</h3><p data-zh="放松、休憩与招待朋友的空间。">Relaxation and lounge areas for unwinding or hosting friends.</p></div>
+      <div class="fac rv"><b>L69</b><h3 data-zh="观景台">Observation Deck</h3><p data-zh="沿观景阶梯而上，到达圆形观景台。">Up the observation stairs to a circular deck above the city.</p></div>
+      <div class="fac rv"><b>L70</b><h3 data-zh="无边际泳池">Skyline Infinity Pool</h3><p data-zh="另有按摩池、泳池露台、圆形空中酒吧、儿童泳池与游乐区、桑拿。">Plus a jacuzzi, pool terrace, circular bar, Little Lagoon &amp; Play Lounge, and saunas.</p></div>
+      <div class="fac rv"><b>L71</b><h3 data-zh="健身室">Fitness Studio</h3><p data-zh="一边运动，一边看城市天际线。">Train with the skyline in front of you.</p></div>
+      <div class="fac rv"><b>L71A</b><h3 data-zh="360 泳池与观景台">Skyline 360 Pool &amp; Deck</h3><p data-zh="360 度环绕的泳池与观景平台。">A pool and deck wrapping all the way round.</p></div>
+      <div class="fac rv"><b>L72</b><h3 data-zh="360 高空温水池">360 Hot Pool</h3><p data-zh="屋顶温水池，全景俯瞰城市。">A rooftop hot pool with a panoramic city view.</p></div>
+      <div class="fac rv"><b>L73</b><h3 data-zh="The Peak 顶层">The Peak</h3><p data-zh="整栋楼的最高点，360 度看吉隆坡。">The highest vantage point, with 360° views of Kuala Lumpur.</p></div>
     </div>
-    <p class="fine" data-zh="设施资料来自发展商的销售讲解，最终规格以发展商正式文件为准。图片为艺术构想图。">Facility details are from the developer's sales presentation; final specifications are subject to the developer's official documents. Images are artist's impressions.</p>
+    <p class="fine"><a href="#" data-lb="plan-l69" style="border-bottom:1px solid var(--gold)" data-zh="69 – 70 楼设施平面图 →">Level 69 – 70 facilities plan →</a> &nbsp;·&nbsp; <a href="#" data-lb="plan-l11" style="border-bottom:1px solid var(--gold)" data-zh="11 楼空中花园平面图 →">Level 11 Sky Forest plan →</a></p>
+
+    <div class="tabs rv" id="tabs"></div>
+    <div class="tabsub" id="tabsub"></div>
+  </div>
+  <div class="reel" id="reel"></div>
+  <div class="wrap">
+    <div class="tags" id="tags"></div>
+    <p class="fine" data-zh="设施资料来自发展商 Sales Kit V4，最终规格以发展商正式文件为准。所有图片均为艺术构想图。">Facility details are from the developer's Sales Kit V4; final specifications are subject to the developer's official documents. All images are artist's impressions.</p>
   </div>
 </section>
 
@@ -417,7 +467,7 @@ footer p+p{margin-top:12px}
     <p class="lead rv" style="margin-top:20px" data-zh="每个户型都标明全栋共有多少间，以及预估每月管理费。点一下就能看平面图，或让我把平面图发到你的 WhatsApp。">Each layout shows how many exist in the whole building and its estimated monthly maintenance. Tap one to see its floor plan, or have it sent to your WhatsApp.</p>
     <div class="chips rv" id="chips"></div>
     <div class="units" id="units"></div>
-    <p class="fine" data-zh="* 预估管理费以每平方尺 RM0.98 计算，仅供参考。">* Estimated maintenance is calculated at RM0.98 psf and is indicative only.</p>
+    <p class="fine" data-zh="* 预估管理费以每平方尺 RM0.95（已含维修储备金）计算，仅供参考。">* Estimated maintenance is calculated at RM0.95 psf (inclusive of sinking fund) and is indicative only.</p>
   </div>
 </section>
 
@@ -429,7 +479,7 @@ footer p+p{margin-top:12px}
     <div class="two">
       <div class="rv">
         <div class="stack">
-          <div class="f1"><b data-zh="11 楼及以上">Level 11 &amp; above</b><span data-zh="住宅单位 · 设施 · 零售店铺<br>住宅楼层 12 – 65 楼，每层 20 个单位">Residences · Facilities · Retail lots<br>Residential floors 12 – 65, 20 units per floor</span></div>
+          <div class="f1"><b data-zh="11 楼及以上">Level 11 &amp; above</b><span data-zh="69 – 73 楼：空中休闲设施<br>12 – 65 楼：住宅，每层 20 个单位<br>11 楼：空中森林与花园">L69 – 73: Wellness &amp; recreation<br>L12 – 65: Residences, 20 per floor<br>L11: Sky Forest &amp; Garden</span></div>
           <div class="f2"><b data-zh="1 至 10 楼">Level 1 – 10</b><span data-zh="停车场">Car park</span></div>
           <div class="f3"><b data-zh="底层">Ground floor</b><span data-zh="迎宾大堂">Grand Lobby</span></div>
           <div class="f4"><b data-zh="地下层">Basement</b><span></span></div>
@@ -443,8 +493,9 @@ footer p+p{margin-top:12px}
         <tr><th data-zh="每层单位">Units per floor</th><td data-zh="20 个（12 – 65 楼）">20 (levels 12 – 65)</td></tr>
         <tr><th data-zh="停车位">Car park</th><td data-zh="638 个停车位">638 parking lots</td></tr>
         <tr><th data-zh="户型">Layout types</th><td data-zh="14 种，583 – 1,487 平方尺">14 types, 583 – 1,487 sq ft</td></tr>
-        <tr><th data-zh="交通">Transport</th><td data-zh="TOD 项目，连接 MRT">Transit-oriented development with MRT access</td></tr>
-        <tr><th data-zh="管理费">Maintenance fee</th><td data-zh="每平方尺 RM0.98">RM0.98 psf</td></tr>
+        <tr><th data-zh="设施楼层">Facilities</th><td data-zh="11 楼空中森林与花园<br>69 – 73 楼休闲与养生">Level 11 Sky Forest &amp; Garden<br>Levels 69 – 73 Wellness &amp; Recreation</td></tr>
+        <tr><th data-zh="交通">Transport</th><td data-zh="MRT 加影线、吉隆坡单轨列车、LRT 安邦线与大城堡线">MRT Kajang Line, KL Monorail, LRT Ampang &amp; Sri Petaling lines nearby</td></tr>
+        <tr><th data-zh="管理费">Maintenance fee</th><td data-zh="每平方尺 RM0.95（已含维修储备金）">RM0.95 psf (inclusive of sinking fund)</td></tr>
       </table>
     </div>
     <div class="photo plate rv" data-lb="floorplate"><img loading="lazy" src="images/floorplate.jpg" alt="Typical floor plan, levels 12 – 65"></div>
@@ -462,7 +513,7 @@ footer p+p{margin-top:12px}
     <div class="flow">
       <div class="rv"><h3 data-zh="发个 WhatsApp">Send a WhatsApp</h3><p data-zh="选一个你方便的日期和时间，一分钟就能完成。">Pick a day and time that suits you. It takes a minute.</p></div>
       <div class="rv"><h3 data-zh="我为你确认时段">I confirm your slot</h3><p data-zh="我会亲自回复你，并先了解你的需求，提前为你准备好资料。">I reply personally, ask what you're looking for, and prepare the right material before you arrive.</p></div>
-      <div class="rv"><h3 data-zh="一对一看房">We sit down, one-to-one</h3><p data-zh="只为你一个人安排的时段，不赶时间，不用跟别人挤。">A session set aside just for you. Unhurried, no crowd.</p></div>
+      <div class="rv"><h3 data-zh="一起看示范单位">We tour the show units together</h3><p data-zh="在 Menara KL33 第 9 层的销售展厅，一对一，不赶时间。">At the Sales Gallery, Level 9, Menara KL33 — one-to-one, unhurried.</p></div>
     </div>
 
     <ul class="get">
@@ -490,9 +541,11 @@ footer p+p{margin-top:12px}
       <details class="rv"><summary data-zh="这是永久地契吗？">Is it really freehold?</summary>
         <p data-zh="是的，土地为永久地契。">Yes. The land tenure is freehold.</p></details>
       <details class="rv"><summary data-zh="交通方便吗？">How is public transport?</summary>
-        <p data-zh="这是一个公共交通导向发展（TOD）项目，连接 MRT。看房时我会给你看具体的车站和步行路线。">It's a transit-oriented development with MRT access. At the viewing I'll show you the exact station and walking route.</p></details>
+        <p data-zh="附近有 MRT 加影线与吉隆坡单轨列车（Bukit Bintang、Imbi、Hang Tuah 站），以及 LRT 安邦线与大城堡线。看房时我会给你看具体的车站和步行路线。">The MRT Kajang Line and KL Monorail are nearby (Bukit Bintang, Imbi, Hang Tuah stations), along with the LRT Ampang and Sri Petaling lines. At the viewing I'll show you the exact stations and walking routes.</p></details>
       <details class="rv"><summary data-zh="每个月的管理费是多少？">How much is the monthly maintenance?</summary>
-        <p data-zh="每平方尺 RM0.98。例如 583 平方尺的单位，每月大约 RM571。上面每个户型都已帮你算好。">RM0.98 psf. A 583 sq ft unit works out to roughly RM571 a month. Every layout above has its figure worked out.</p></details>
+        <p data-zh="每平方尺 RM0.95，已包含维修储备金。例如 583 平方尺的单位，每月大约 RM554。上面每个户型都已帮你算好。">RM0.95 psf, sinking fund included. A 583 sq ft unit works out to roughly RM554 a month. Every layout above has its figure worked out.</p></details>
+      <details class="rv"><summary data-zh="销售展厅在哪里？">Where is the sales gallery?</summary>
+        <p data-zh="Menara KL33 第 9 层，Jalan Sultan Ismail，吉隆坡。示范单位将于 2026 年 11 月 21 日开放。先 WhatsApp 我约好时间，我会在展厅等你。">Level 9, Menara KL33, Jalan Sultan Ismail, Kuala Lumpur. The show units are unveiled on 21 November 2026. WhatsApp me to fix a time and I'll meet you there.</p></details>
       <details class="rv"><summary data-zh="有停车位吗？">Does it come with parking?</summary>
         <p data-zh="项目共有 638 个停车位，位于 1 至 10 楼。停车位的分配方式因户型而异，看房时我会针对你选的户型详细说明。">The development has 638 parking lots across levels 1 to 10. Allocation differs by unit type — I'll take you through exactly what applies to your layout at the viewing.</p></details>
       <details class="rv"><summary data-zh="看房需要付费或下订吗？">Do I have to pay or commit to anything to view?</summary>
@@ -593,7 +646,7 @@ footer p+p{margin-top:12px}
     $$('[data-zh]').forEach(e=>e.innerHTML = l==='zh'?e._zh:e._en);
     $$('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
     try{localStorage.setItem('lang',l)}catch(e){}
-    renderChips(); renderUnits(); renderQuiz(); renderUnitSel();
+    renderGallery(); renderChips(); renderUnits(); renderQuiz(); renderUnitSel();
   }
   $$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
 
@@ -619,6 +672,18 @@ footer p+p{margin-top:12px}
   addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
   $('.act',lb).onclick = ()=>askPlan(lbUnit);
   $$('[data-lb]').forEach(e=>e.onclick=ev=>{ev.preventDefault();openLb(e.dataset.lb);});
+
+  /* --- gallery --- */
+  let gal = GALLERY[0].id;
+  function renderGallery(){
+    const g = GALLERY.find(x=>x.id===gal);
+    $('#tabs').innerHTML = GALLERY.map(x=>'<button class="tab'+(x.id===gal?' on':'')+'" data-g="'+x.id+'">'+t(x.en,x.zh)+'</button>').join('');
+    $$('#tabs .tab').forEach(b=>b.onclick=()=>{gal=b.dataset.g;renderGallery();$('#reel').scrollLeft=0;});
+    $('#tabsub').textContent = t(g.sen,g.szh);
+    $('#reel').innerHTML = g.imgs.map(n=>'<img loading="lazy" src="'+img(n)+'" data-n="'+n+'" alt="'+P+' — '+g.en+'">').join('');
+    $$('#reel img').forEach(i=>i.onclick=()=>openLb(i.dataset.n));
+    $('#tags').innerHTML = g.tags.map(x=>'<span>'+t(x[0],x[1])+'</span>').join('');
+  }
 
   /* --- layouts --- */
   const sorted = [...UNITS].sort((a,b)=>a.s-b.s);
